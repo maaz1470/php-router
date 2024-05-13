@@ -1,6 +1,6 @@
 {
     "name": "rahat1470/php-router",
-    "description": "This is most powerfull routing system in php",
+    "description": "Create Beautifull and Clean Routing System in your application",
     "keywords": ["routing","php router","route","php route","Navigation"],
     "type": "library",
     "require": {
