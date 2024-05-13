@@ -1,0 +1,21 @@
+{
+    "name": "rahat1470/php-router",
+    "description": "This is most powerfull routing system in php",
+    "keywords": ["routing","php router","route","php route","Navigation"],
+    "type": "library",
+    "require": {
+        "php": "^8.2"
+    },
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Rahat1470\\PhpRouter\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Rahat Hossain",
+            "email": "webmaaz@gmail.com"
+        }
+    ]
+}
