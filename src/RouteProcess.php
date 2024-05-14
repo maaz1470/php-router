@@ -99,7 +99,6 @@ class RouteProcess{
                 echo $output;
             }
             exit();
-            
         }else if(is_callable($callback)){
             $output = call_user_func_array($callback, $parameters);
             if(is_array($output)){
