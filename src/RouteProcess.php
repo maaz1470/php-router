@@ -2,11 +2,13 @@
 
     namespace Rahat1470\PhpRouter;
 
+use ReflectionMethod;
+
 class RouteProcess{
     public static function route($route, $path_to_include)
     {
         $callback = $path_to_include;
-        if (!is_callable($callback)) {
+        if (!is_callable($callback) && !is_array($callback)) {
             if (!strpos($path_to_include, '.php')) {
                 $path_to_include .= '.php';
             }
@@ -45,7 +47,14 @@ class RouteProcess{
             if (is_array($callback)) {
                 $className = $callback[0];
                 $method = $callback[1];
-                $output = $className::$method();
+                $checkMethod = new ReflectionMethod($className,$method);
+                if($checkMethod->isStatic()){
+                    $output = $className::$method();
+                }else{
+                    $class = new $className();
+                    $output = $class->$method();
+                }
+                
                 if(is_array($output)){
                     print_r($output);
                 }else{
@@ -53,7 +62,12 @@ class RouteProcess{
                 }
                 exit();
             }else if(is_callable($callback)){
-                call_user_func_array($callback, []);
+                $output = call_user_func_array($callback, []);
+                if(is_array($output)){
+                    print_r($output);
+                }else{
+                    echo $output;
+                }
                 exit();
             }
             include_once __DIR__ . "/$path_to_include";
@@ -87,7 +101,12 @@ class RouteProcess{
             exit();
             
         }else if(is_callable($callback)){
-            call_user_func_array($callback, $parameters);
+            $output = call_user_func_array($callback, $parameters);
+            if(is_array($output)){
+                print_r($output);
+            }else{
+                echo $output;
+            }
             exit();
         }
         include_once __DIR__ . "/$path_to_include";
